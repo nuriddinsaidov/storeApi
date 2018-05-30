@@ -20,11 +20,12 @@ class RegisterController extends BaseController
     {
 
 
-        $field = filter_var(request()->input('email'), FILTER_VALIDATE_EMAIL) ? 'email' : 'login';
-
         $validator = Validator::make($request->all(), [
-             $field => ($field =='email' ? 'required|'.$field: 'required'),
+            'login' => 'required',
+            'name' => 'required',
+            'email' => 'required|email',
             'password' => 'required',
+            'c_password' => 'required|same:password',
         ]);
 
         if($validator->fails()){
